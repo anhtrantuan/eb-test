@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>EbTest</title>
+    <title>EB Test</title>
     <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
     <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
     <%= csrf_meta_tags %>
@@ -9,6 +9,12 @@
   <body>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
+
+    <% if user_signed_in? %>
+      <p>Hi, <%= current_user.email %>! <%= link_to "Logout here", destroy_user_session_path, method: :delete %>!</p>
+    <% else %>
+      <p>Hi, guest! <%= link_to "Login here", new_user_session_path %>!</p>
+    <% end %>
 
     <%= yield %>
   </body>

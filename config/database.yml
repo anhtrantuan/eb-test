@@ -1,6 +1,16 @@
 default: &default
-  adapter: postgresql
+  adapter: "postgresql"
 
 development:
   <<: *default
-  database: eb_test_development
+  host: "localhost"
+  username: "postgres"
+  password: "postgres"
+  database: "eb_test_development"
+
+production:
+  <<: *default
+  host: <%= ENV["RDS_DB_HOST"] %>
+  username: "postgres"
+  password: "postgres"
+  database: "eb_test_production"
