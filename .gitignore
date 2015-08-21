@@ -17,6 +17,7 @@
 /tmp
 
 *~
+*.swp
 
 # Elastic Beanstalk Files
 .elasticbeanstalk/*

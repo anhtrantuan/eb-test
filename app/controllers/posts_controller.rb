@@ -24,8 +24,11 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     @post.author = current_user
+    @post.highlighted_content = ""
 
     if @post.save
+      PygmentsWorker.perform_async(@post.id)
+
       redirect_to @post, notice: 'Post was successfully created.'
     else
       render :new
@@ -34,7 +37,11 @@ class PostsController < ApplicationController
 
   # PATCH/PUT /posts/1
   def update
+    @post.highlighted_content = ""
+
     if @post.update(post_params)
+      PygmentsWorker.perform_async(@post.id)
+
       redirect_to @post, notice: 'Post was successfully updated.'
     else
       render :edit

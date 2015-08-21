@@ -6,14 +6,16 @@
 </p>
 
 <p>
-  <strong>Content:</strong>
-  <%= @post.content %>
-</p>
-
-<p>
   <strong>Author:</strong>
   <%= @post.author_email %>
 </p>
+
+<p><strong>Content:</strong></p>
+<% if @post.highlighted_content %>
+  <%= @post.highlighted_content.html_safe %>
+<% else %>
+  <pre class="content"><%= @post.content.html_safe %></pre>
+<% end %>
 
 <%= link_to 'Edit', edit_post_path(@post) %> |
 <%= link_to 'Back', posts_path %>
