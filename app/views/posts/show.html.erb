@@ -11,7 +11,7 @@
 </p>
 
 <p><strong>Content:</strong></p>
-<% if @post.highlighted_content %>
+<% if @post.highlighted_content.present? %>
   <%= @post.highlighted_content.html_safe %>
 <% else %>
   <pre class="content"><%= @post.content.html_safe %></pre>
